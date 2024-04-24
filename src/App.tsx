@@ -1,6 +1,6 @@
-import "./App.css";
 import { Route, Routes, Navigate, Link } from "react-router-dom";
-import path from "./constants/path";
+import path from "constants/path";
+import "App.css";
 function App() {
   return (
     <>
