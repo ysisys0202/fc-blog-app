@@ -5,6 +5,8 @@ const path = {
   postNew: "/posts/new",
   postEdit: "/posts/edit/:id",
   profile: "/profile",
+  login: "/login",
+  signup: "/signup",
 };
 
 export default path;
