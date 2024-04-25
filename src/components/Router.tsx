@@ -14,13 +14,13 @@ const Router = () => {
     <Routes>
       <Route path={path.home} element={<Home />}></Route>
       <Route path={path.postList} element={<PostList />}></Route>
-      <Route path={path.postDetail} element={<PostDetail />}></Route>
+      <Route path={`${path.postDetail}/:id`} element={<PostDetail />}></Route>
       <Route path={path.postNew} element={<NewPost />}></Route>
-      <Route path={path.postEdit} element={<PostEdit />}></Route>
+      <Route path={`${path.postEdit}/:id`} element={<PostEdit />}></Route>
       <Route path={path.profile} element={<Profile />}></Route>
       <Route path={path.login} element={<Login />}></Route>
       <Route path={path.signup} element={<Signup />}></Route>
-      <Route path="*" element={<Navigate replace to="/" />}></Route>
+      <Route path="*" element={<Navigate replace to={path.home} />}></Route>
     </Routes>
   );
 };
