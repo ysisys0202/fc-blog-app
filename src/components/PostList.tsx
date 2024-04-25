@@ -4,7 +4,7 @@ const PostList = () => {
   return (
     <div className="post__list">
       {[...Array(10)].map((item, index) => (
-        <PostCard postId={index} />
+        <PostCard key={index} postId={index} />
       ))}
     </div>
   );
