@@ -166,3 +166,47 @@ footer a:hover {
 .post__detail .post__text {
   padding: 20px 0;
 }
+
+/* profile */
+
+.profile__box {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 auto;
+  padding: 20px;
+  max-width: 680px;
+  font-size: 18px;
+  line-height: 24px;
+  text-align: left;
+}
+.profile__box .flex__box-lg {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+}
+.profile__box .profile__image {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background-color: #f2f2f2;
+}
+.profile__box .profile__name {
+  font-size: 16px;
+  padding-top: 4px;
+  margin: 0;
+}
+.profile__box .profile__email {
+  font-weight: 500;
+  margin: 0;
+}
+.profile__box .profile__logout {
+  color: gray;
+  font-size: 14px;
+  transition: color 200ms ease-in-out;
+}
+.profile__box .profile__logout:focus,
+.profile__box .profile__logout:hover {
+  color: black;
+}
