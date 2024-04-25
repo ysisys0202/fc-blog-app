@@ -10,9 +10,11 @@ import PostEdit from "pages/posts/edit";
 import Login from "pages/login";
 import Signup from "pages/signup";
 
-const Router = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+type Props = {
+  isAuthenticated: boolean;
+};
 
+const Router = ({ isAuthenticated }: Props) => {
   return (
     <Routes>
       {isAuthenticated ? (
