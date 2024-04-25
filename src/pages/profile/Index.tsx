@@ -1,13 +1,14 @@
-import Footer from "components/Footer";
 import Header from "components/Header";
-import React from "react";
+import Footer from "components/Footer";
 import Profile from "components/Profile";
+import PostList from "components/PostList";
 
 const ProfilePage = () => {
   return (
     <>
       <Header />
       <Profile />
+      <PostList />
       <Footer />
     </>
   );
