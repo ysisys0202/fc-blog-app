@@ -340,3 +340,54 @@ input#img-3:checked ~ .carousel__dots label#img-dot-3 {
 input:checked + .carousel__slide-container .nav label {
   display: block;
 }
+
+/* form */
+
+.form {
+  margin: 0 auto;
+  max-width: 680px;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.form__block {
+  margin-top: 20px;
+  width: 100%;
+}
+
+.form__block label {
+  display: block;
+  margin: 20px 0 10px;
+  font-weight: 500;
+}
+.form__button--submit {
+  margin: 0 auto;
+  padding: 10px;
+  width: 100%;
+  height: 48px;
+  cursor: pointer;
+  border: none;
+  background-color: #2563eb;
+  border-radius: 0.3rem;
+  color: #fff;
+  transition: background-color 200ms ease-in-out;
+}
+.form__button--submit:hover {
+  background-color: #1945a4;
+}
+.form input,
+.form textarea {
+  padding: 10px;
+  max-width: 680px;
+  width: 96%;
+  border-radius: 0.3rem;
+  border: 1px solid lightgray;
+  font-size: 16px;
+}
+.form input {
+  height: 20px;
+}
+.form textarea {
+  min-height: 400px;
+  line-height: 1.5;
+}
