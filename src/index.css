@@ -80,7 +80,8 @@ footer a:hover {
 }
 
 /* post list */
-.post__list {
+.post__list,
+.post__content {
   margin: 0 auto;
   min-height: 90vh;
   padding: 20px 40px;
@@ -142,4 +143,23 @@ footer a:hover {
 .post__edit:focus,
 .post__edit:hover {
   color: black;
+}
+
+/* post content */
+
+.post__content .post__title {
+  font-size: 36px;
+  line-height: 40px;
+}
+.post__content .post__utils-box {
+  padding: 10px 0;
+  border-top: 1px solid #f2f2f2;
+  border-bottom: 1px solid #f2f2f2;
+  flex-direction: row;
+}
+.post__content .post__profile-box {
+  padding: 10px 0;
+}
+.post__detail .post__text {
+  padding: 20px 0;
 }
