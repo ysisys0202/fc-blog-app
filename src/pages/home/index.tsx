@@ -1,16 +1,12 @@
 import { Link } from "react-router-dom";
 import path from "constants/path";
+import Header from "components/Header";
+import Footer from "components/Footer";
 
 const Home = () => {
   return (
     <div>
-      <header>
-        <div>
-          <Link to={path.postNew}>글쓰기</Link>
-          <Link to={path.postList}>게시글</Link>
-          <Link to={path.profile}>프로필</Link>
-        </div>
-      </header>
+      <Header />
       <nav className="post__navigation">
         <ul className="post__navigation-list">
           <li className="post__navigation-item post__navigation-item--active">
@@ -49,11 +45,7 @@ const Home = () => {
           </div>
         ))}
       </div>
-      <footer>
-        <Link to={path.postNew}>글쓰기</Link>
-        <Link to={path.postList}>게시글</Link>
-        <Link to={path.profile}>프로필</Link>
-      </footer>
+      <Footer />
     </div>
   );
 };
