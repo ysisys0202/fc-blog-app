@@ -412,3 +412,7 @@ input:checked + .carousel__slide-container .nav label {
 .fomr__link:focus {
   color: black;
 }
+
+.form_error {
+  color: red;
+}
