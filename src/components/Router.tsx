@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 import path from "constants/path";
 import Home from "pages/home";
@@ -10,17 +11,30 @@ import Login from "pages/login";
 import Signup from "pages/signup";
 
 const Router = () => {
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+
   return (
     <Routes>
-      <Route path={path.home} element={<Home />}></Route>
-      <Route path={path.postList} element={<PostList />}></Route>
-      <Route path={`${path.postDetail}/:id`} element={<PostDetail />}></Route>
-      <Route path={path.postNew} element={<NewPost />}></Route>
-      <Route path={`${path.postEdit}/:id`} element={<PostEdit />}></Route>
-      <Route path={path.profile} element={<Profile />}></Route>
-      <Route path={path.login} element={<Login />}></Route>
-      <Route path={path.signup} element={<Signup />}></Route>
-      <Route path="*" element={<Navigate replace to={path.home} />}></Route>
+      {isAuthenticated ? (
+        <>
+          {" "}
+          <Route path={path.home} element={<Home />} />
+          <Route path={path.postList} element={<PostList />} />
+          <Route path={`${path.postDetail}/:id`} element={<PostDetail />} />
+          <Route path={path.postNew} element={<NewPost />} />
+          <Route path={`${path.postEdit}/:id`} element={<PostEdit />} />
+          <Route path={path.profile} element={<Profile />} />
+          <Route path={path.login} element={<Login />} />
+          <Route path={path.signup} element={<Signup />} />
+          <Route path="*" element={<Navigate replace to={path.home} />} />
+        </>
+      ) : (
+        <>
+          <Route path={path.login} element={<Login />} />
+          <Route path={path.signup} element={<Signup />} />
+          <Route path="*" element={<Navigate replace to={path.login} />} />
+        </>
+      )}
     </Routes>
   );
 };
