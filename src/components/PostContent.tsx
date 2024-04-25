@@ -1,4 +1,5 @@
-import React from "react";
+import { Link } from "react-router-dom";
+import path from "constants/path";
 
 const PostContent = () => {
   return (
@@ -18,9 +19,9 @@ const PostContent = () => {
           <button type="button" className="post__delete">
             삭제
           </button>
-          <button type="button" className="post__edit">
+          <Link to={`${path.postEdit}/1`} className="post__edit">
             수정
-          </button>
+          </Link>
         </div>
         <p className="post__text">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam sit
