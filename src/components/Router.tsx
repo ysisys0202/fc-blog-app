@@ -19,15 +19,12 @@ const Router = ({ isAuthenticated }: Props) => {
     <Routes>
       {isAuthenticated ? (
         <>
-          {" "}
           <Route path={path.home} element={<Home />} />
           <Route path={path.postList} element={<PostList />} />
           <Route path={`${path.postDetail}/:id`} element={<PostDetail />} />
           <Route path={path.postNew} element={<NewPost />} />
           <Route path={`${path.postEdit}/:id`} element={<PostEdit />} />
           <Route path={path.profile} element={<Profile />} />
-          <Route path={path.login} element={<Login />} />
-          <Route path={path.signup} element={<Signup />} />
           <Route path="*" element={<Navigate replace to={path.home} />} />
         </>
       ) : (

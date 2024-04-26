@@ -1,22 +1,21 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import path from "constants/path";
 import { app } from "firebaseApp";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { toast } from "react-toastify";
+import { emailRegex } from "constants/regex";
 const LoginForm = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [passwordConfirm, setPasswordConfirm] = useState<string>("");
   const [error, setError] = useState<string>("");
-
+  const navigate = useNavigate();
   function handleEmailInputChange(event: React.ChangeEvent<HTMLInputElement>) {
     const value = event.target.value;
     setEmail(value);
-    const validRegex =
-      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
-    if (!value?.match(validRegex)) {
+    if (!value?.match(emailRegex)) {
       setError("이메일 형식이 올바르지 않습니다.");
     } else {
       setError("");
@@ -60,6 +59,7 @@ const LoginForm = () => {
       const auth = getAuth(app);
       await createUserWithEmailAndPassword(auth, email, password);
       toast.success("회원가입에 성공했습니다.");
+      navigate(path.home);
     } catch (error: any) {
       console.log(error);
       toast.error(error?.code);
