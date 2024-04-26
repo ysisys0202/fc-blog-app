@@ -1,27 +1,25 @@
-import { useEffect, useState } from "react";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { app } from "firebaseApp";
+import { useContext, useEffect, useState } from "react";
+import { db } from "firebaseApp";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Router from "components/Router";
 import Loader from "components/Loader";
+import AuthContext from "context/AuthContext";
 
 function App() {
-  const auth = getAuth(app);
-
   const [init, setInit] = useState<boolean>(false); //auth가 initialize 전에 loader를 띄워주는 용도
+  const user = useContext(AuthContext);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(
-    !!auth?.currentUser //user의 login 상태 (currentUser가 있을때)
+    !!user //user의 login 상태 (user가 있을때)
   );
 
-  onAuthStateChanged(auth, (user) => {
+  useEffect(() => {
     if (user) {
-      setIsAuthenticated(true);
+      setInit(true);
     } else {
-      setIsAuthenticated(false);
+      setInit(false);
     }
-    setInit(true);
-  });
+  }, [user]);
 
   return (
     <>
