@@ -1,5 +1,4 @@
 import { useContext, useEffect, useState } from "react";
-import { db } from "firebaseApp";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Router from "components/Router";
