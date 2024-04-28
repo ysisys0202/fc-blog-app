@@ -5,4 +5,6 @@ export type Post = {
   summary: string;
   content: string;
   createdAt: string;
+  updatedAt?: string;
+  uid?: string;
 };

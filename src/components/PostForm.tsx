@@ -1,52 +1,97 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, doc, getDoc, updateDoc } from "firebase/firestore";
 import { toast } from "react-toastify";
 import { db } from "firebaseApp";
 import AuthContext from "context/AuthContext";
 import path from "constants/path";
+import { Post } from "types/post";
 
-const PostForm = () => {
+type Props = {
+  type?: "create" | "edit";
+  id?: string;
+};
+
+const PostForm = ({ type = "create", id }: Props) => {
   const [title, setTitle] = useState<string>("");
   const [summary, setSummary] = useState<string>("");
   const [content, setContent] = useState<string>("");
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
+  const [post, setPost] = useState<Post | null>(null);
 
   function handleTitleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
     const value = event.target.value;
     setTitle(value);
   }
+
   function handleSummaryInputChange(
     event: React.ChangeEvent<HTMLInputElement>
   ) {
     const value = event.target.value;
     setSummary(value);
   }
+
   function handleContentInputChange(
     event: React.ChangeEvent<HTMLTextAreaElement>
   ) {
     const value = event.target.value;
     setContent(value);
   }
+
   async function handlePostFormSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     try {
-      // Add a new document with a generated id.
-      const docRef = await addDoc(collection(db, "posts"), {
-        title,
-        summary,
-        content,
-        createdAt: new Date().toLocaleDateString(),
-        author: user?.email,
-      });
-      toast.success("게시글을 생성했습니다.");
-      navigate(path.home);
+      if (type === "create") {
+        const docRef = await addDoc(collection(db, "posts"), {
+          title,
+          summary,
+          content,
+          createdAt: new Date().toLocaleDateString(),
+          author: user?.email,
+        });
+        toast.success("게시글을 생성했습니다.");
+        navigate(path.home);
+      }
+      if (type === "edit" && id) {
+        const postRef = doc(db, "posts", id);
+        await updateDoc(postRef, {
+          title,
+          summary,
+          content,
+          updatedAt: new Date().toLocaleDateString(),
+        });
+        toast.success("게시글을 수정했습니다.");
+        navigate(`${path.postDetail}/${id}`);
+      }
     } catch (error: any) {
       console.log(error);
       toast.error(error?.code);
     }
   }
+
+  async function getPost(postId: string) {
+    const docRef = doc(db, "posts", postId);
+    const docSnap = await getDoc(docRef);
+    setPost({ ...(docSnap.data() as Post), id: docSnap.id });
+  }
+
+  useEffect(() => {
+    if (!id || type === "create") {
+      return;
+    }
+    getPost(id);
+  }, [id]);
+
+  useEffect(() => {
+    if (!post) {
+      return;
+    }
+    setTitle(post.title);
+    setSummary(post.summary);
+    setContent(post.content);
+  }, [post]);
+
   return (
     <form className="form" onSubmit={handlePostFormSubmit}>
       <div className="form__block">
@@ -80,8 +125,8 @@ const PostForm = () => {
         />
       </div>
       <div className="form__block">
-        <button type="submit" value="제출" className="form__button--submit">
-          제출
+        <button type="submit" className="form__button--submit">
+          {type === "create" ? "제출" : "수정"}
         </button>
       </div>
     </form>
