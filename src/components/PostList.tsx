@@ -1,26 +1,18 @@
 import { useContext, useEffect, useState } from "react";
 import { getDocs, collection } from "firebase/firestore";
 import { db } from "firebaseApp";
-import PostCard from "components/PostCard";
+import { Post } from "types/post";
 import AuthContext from "context/AuthContext";
-
-type PostListType = {
-  id: string;
-  title: string;
-  author: string;
-  summary: string;
-  content: string;
-  createdAt: string;
-};
+import PostCard from "components/PostCard";
 
 const PostList = () => {
-  const [postList, setPostList] = useState<PostListType[]>([]);
+  const [postList, setPostList] = useState<Post[]>([]);
   const { user } = useContext(AuthContext);
   async function getPost() {
     const datas = await getDocs(collection(db, "posts"));
     datas.forEach((doc) => {
       const dataOdj = { ...doc.data(), id: doc.id };
-      setPostList((prevPostList) => [...prevPostList, dataOdj as PostListType]);
+      setPostList((prevPostList) => [...prevPostList, dataOdj as Post]);
     });
   }
   useEffect(() => {
