@@ -60,7 +60,17 @@ footer a:focus,
 footer a:hover {
   color: black;
 }
-
+.footer__theme-button {
+  border: none;
+  background-color: transparent;
+  margin-left: auto;
+  width: 30px;
+  height: 30px;
+}
+.footer__theme-button svg {
+  width: 100%;
+  height: 100%;
+}
 /* post navigation */
 
 .post__navigation-list {
@@ -466,4 +476,46 @@ input:checked + .carousel__slide-container .nav label {
   border: 5px solid dodgerblue;
   z-index: 9999;
   animation: rotation 1000ms linear infinite;
+}
+
+/* dark mode */
+html {
+  transition: all 250ms ease-in-out;
+}
+html.theme-light {
+  background-color: white;
+}
+html.theme-dark {
+  background-color: #1e2937;
+}
+html.theme-dark a,
+html.theme-dark .form label,
+html.theme-dark .post_delete,
+html.theme-dark .profile_logout,
+html.theme-dark .form__title,
+html.theme-dark .post__navigation-item--active,
+html.theme-dark .post__title,
+html.theme-dark .post__author-name,
+html.theme-dark .footer__theme-button,
+html.theme-dark .profile__name {
+  color: white;
+}
+
+html.theme-dark a:hover,
+html.theme-dark a:focus,
+html.theme-dark .post__text,
+html.theme-dark .post__text--pre-wrap,
+html.theme-dark .profile__email,
+html.theme-dark .post__date,
+html.theme-dark .form_block {
+  color: lightgray;
+}
+
+html.theme-dark .form__error {
+  color: #ff6a71;
+}
+
+html.theme-dark header,
+html.theme-dark footer {
+  background-color: #111827;
 }

@@ -23,10 +23,10 @@ function App() {
   }, [user]);
 
   return (
-    <>
+    <main>
       <ToastContainer />
       {init ? <Router isAuthenticated={isAuthenticated} /> : <Loader />}
-    </>
+    </main>
   );
 }
 
