@@ -172,11 +172,12 @@ footer a:hover {
 .post__content .post__profile-box {
   padding: 10px 0;
 }
-.post__detail .post__text {
+.post__content .post__text {
   padding: 20px 0;
 }
-.post__detail .post__text--pre-wrap {
+.post__content .post__text--pre-wrap {
   white-space: pre-wrap;
+  word-break: break-all;
 }
 
 /* profile */

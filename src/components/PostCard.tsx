@@ -8,6 +8,7 @@ type Props = {
   author: string;
   createdAt: string;
   loginUser: string;
+  onPostDelete: () => void;
 };
 
 const PostCard = ({
@@ -17,6 +18,7 @@ const PostCard = ({
   author,
   createdAt,
   loginUser,
+  onPostDelete,
 }: Props) => {
   const isAuthor = author === loginUser;
   return (
@@ -32,7 +34,7 @@ const PostCard = ({
       </Link>
       {isAuthor && (
         <div className="post_utils-box">
-          <button type="button" className="post__delete">
+          <button type="button" className="post__delete" onClick={onPostDelete}>
             삭제
           </button>
           <Link to={`${path.postEdit}/${postId}`} className="post__edit">
