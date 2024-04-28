@@ -136,7 +136,7 @@ footer a:hover {
 .post__delete,
 .post__edit {
   font-size: 14px;
-  color: gray;
+  color: gray !important;
   background-color: transparent;
   border: none;
   cursor: pointer;
@@ -146,7 +146,15 @@ footer a:hover {
 .post__delete:hover,
 .post__edit:focus,
 .post__edit:hover {
-  color: black;
+  color: black !important;
+}
+
+.post__no-post {
+  padding: 24px;
+  text-align: center;
+  color: gray;
+  border: 1px solid #f2f2f2;
+  border-radius: 20px;
 }
 
 /* post content */
