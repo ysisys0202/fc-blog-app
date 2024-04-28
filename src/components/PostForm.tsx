@@ -6,6 +6,8 @@ import { db } from "firebaseApp";
 import AuthContext from "context/AuthContext";
 import path from "constants/path";
 import { Post } from "types/post";
+import Category from "types/category";
+import CATEGORIES from "constants/categories";
 
 type Props = {
   type?: "create" | "edit";
@@ -16,6 +18,7 @@ const PostForm = ({ type = "create", id }: Props) => {
   const [title, setTitle] = useState<string>("");
   const [summary, setSummary] = useState<string>("");
   const [content, setContent] = useState<string>("");
+  const [category, setCategory] = useState<Category | string>("");
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const [post, setPost] = useState<Post | null>(null);
@@ -39,6 +42,13 @@ const PostForm = ({ type = "create", id }: Props) => {
     setContent(value);
   }
 
+  function handleCategorySelectChange(
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) {
+    const value = event.target.value;
+    setCategory(value as Category);
+  }
+
   async function handlePostFormSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     try {
@@ -47,6 +57,7 @@ const PostForm = ({ type = "create", id }: Props) => {
           title,
           summary,
           content,
+          category,
           createdAt: new Date().toLocaleDateString("ko", {
             hour: "2-digit",
             minute: "2-digit",
@@ -63,6 +74,7 @@ const PostForm = ({ type = "create", id }: Props) => {
           title,
           summary,
           content,
+          category,
           updatedAt: new Date().toLocaleDateString("ko", {
             hour: "2-digit",
             minute: "2-digit",
@@ -98,6 +110,7 @@ const PostForm = ({ type = "create", id }: Props) => {
     setTitle(post.title);
     setSummary(post.summary);
     setContent(post.content);
+    setCategory(post.category ?? "");
   }, [post]);
 
   return (
@@ -112,6 +125,23 @@ const PostForm = ({ type = "create", id }: Props) => {
           value={title}
           onChange={handleTitleInputChange}
         />
+      </div>
+      <div className="form__block">
+        <label htmlFor="category">카테고리</label>
+        <select
+          name="category"
+          id="category"
+          className="form__select"
+          value={category as Category}
+          onChange={handleCategorySelectChange}
+        >
+          <option value="">카테고리를 선택해주세요.</option>
+          {CATEGORIES.map((category) => (
+            <option value={category} key={category}>
+              {category}
+            </option>
+          ))}
+        </select>
       </div>
       <div className="form__block">
         <label htmlFor="summary">요약</label>

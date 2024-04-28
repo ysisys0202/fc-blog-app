@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import path from "constants/path";
-type TabType = "all" | "my";
+import CATEGORIES from "constants/categories";
+import Category from "types/category";
+type TabType = "all" | "my" | Category;
 
 const PostNavigation = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -9,7 +11,6 @@ const PostNavigation = () => {
   const [activeTab, setActiveTab] = useState<TabType>(
     (searchParams.get("post-tab") as TabType) ?? "all"
   );
-
   function handleTabClick(tabName: TabType) {
     navigate(`${path.home}?post-tab=${tabName}`, { replace: true });
   }
@@ -29,6 +30,18 @@ const PostNavigation = () => {
             onClick={handleTabClick.bind(null, tab.nameEn)}
           >
             {tab.nameKor}
+          </li>
+        ))}
+        {CATEGORIES.map((category) => (
+          <li
+            key={category}
+            role="presentation"
+            className={`post__navigation-item ${
+              activeTab === category ? "post__navigation-item--active" : ""
+            }`}
+            onClick={handleTabClick.bind(null, category)}
+          >
+            {category}
           </li>
         ))}
       </ul>

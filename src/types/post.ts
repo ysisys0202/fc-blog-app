@@ -1,3 +1,5 @@
+import Category from "types/category";
+
 export type Post = {
   id: string;
   title: string;
@@ -7,4 +9,5 @@ export type Post = {
   createdAt: string;
   updatedAt?: string;
   uid?: string;
+  category?: Category;
 };

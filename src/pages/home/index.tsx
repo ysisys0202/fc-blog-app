@@ -24,8 +24,14 @@ const Home = () => {
         where("author", "==", user.email),
         orderBy("createdAt", "desc")
       );
-    } else {
+    } else if (activePostTab === "all") {
       postsQuery = query(postsRef, orderBy("createdAt", "desc"));
+    } else {
+      postsQuery = query(
+        postsRef,
+        where("category", "==", activePostTab),
+        orderBy("createdAt", "desc")
+      );
     }
 
     const querySnapshot = await getDocs(postsQuery);
