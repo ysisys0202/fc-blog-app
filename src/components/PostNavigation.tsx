@@ -1,14 +1,21 @@
-import React, { useState } from "react";
-
+import { useEffect, useState } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import path from "constants/path";
 type TabType = "all" | "my";
 
 const PostNavigation = () => {
-  const [activeTab, setActiveTab] = useState<TabType>("all");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
+  const [activeTab, setActiveTab] = useState<TabType>(
+    (searchParams.get("post-tab") as TabType) ?? "all"
+  );
 
   function handleTabClick(tabName: TabType) {
-    setActiveTab(tabName);
+    navigate(`${path.home}?post-tab=${tabName}`, { replace: true });
   }
-
+  useEffect(() => {
+    setActiveTab((searchParams.get("post-tab") as TabType) ?? "all");
+  }, [searchParams]);
   return (
     <nav className="post__navigation">
       <ul className="post__navigation-list">

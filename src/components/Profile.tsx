@@ -1,15 +1,14 @@
-import { useCallback, useContext } from "react";
-import { Auth, getAuth } from "firebase/auth";
+import { getAuth, signOut } from "firebase/auth";
 import { toast } from "react-toastify";
 import { app } from "firebaseApp";
 import { useNavigate } from "react-router-dom";
 import path from "constants/path";
-
-import AuthContext from "context/AuthContext";
+import { useCallback } from "react";
 
 const Profile = () => {
+  const auth = getAuth(app);
   const navigate = useNavigate();
-  const { user } = useContext(AuthContext);
+
   const handleLogoutButton = useCallback(async function handleLogoutButton() {
     const auth = getAuth(app);
     try {
@@ -26,8 +25,10 @@ const Profile = () => {
       <div className="flex__box-lg">
         <div className="profile__image"></div>
         <div>
-          <p className="profile__email">{user?.email}</p>
-          <p className="profile__name">{user?.displayName || "사용자"}</p>
+          <p className="profile__email">{auth.currentUser?.email}</p>
+          <p className="profile__name">
+            {auth.currentUser?.displayName || "사용자"}
+          </p>
         </div>
       </div>
       <button className="profile__logout" onClick={handleLogoutButton}>
@@ -38,6 +39,3 @@ const Profile = () => {
 };
 
 export default Profile;
-function signOut(auth: Auth) {
-  throw new Error("Function not implemented.");
-}

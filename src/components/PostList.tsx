@@ -1,26 +1,19 @@
-import { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { getDocs, collection, doc, deleteDoc } from "firebase/firestore";
+import { doc, deleteDoc } from "firebase/firestore";
 import { toast } from "react-toastify";
 import { db } from "firebaseApp";
 import path from "constants/path";
 import { Post } from "types/post";
-import AuthContext from "context/AuthContext";
 import PostCard from "components/PostCard";
+import { useNavigate } from "react-router-dom";
 
-const PostList = () => {
+type Props = {
+  postList: Post[];
+  loginUser: string;
+  getPost: () => void;
+};
+
+const PostList = ({ postList, loginUser, getPost }: Props) => {
   const navigate = useNavigate();
-  const [postList, setPostList] = useState<Post[]>([]);
-  const { user } = useContext(AuthContext);
-  async function getPost() {
-    const querySnapshot = await getDocs(collection(db, "posts"));
-    const datas = querySnapshot.docs.map((doc) => ({
-      ...(doc.data() as Post),
-      id: doc.id,
-    }));
-    setPostList(datas);
-  }
-
   async function handleDeleteButton(postId: string) {
     const deleteConfirm = window.confirm("해당 게시글을 삭제하시겠습니까?");
     if (!deleteConfirm) {
@@ -36,9 +29,6 @@ const PostList = () => {
       toast.error(error?.code);
     }
   }
-  useEffect(() => {
-    getPost();
-  }, []);
 
   return (
     <>
@@ -52,7 +42,7 @@ const PostList = () => {
               summary={post.summary}
               author={post.author}
               createdAt={post.createdAt}
-              loginUser={user?.email || ""}
+              loginUser={loginUser}
               onPostDelete={handleDeleteButton.bind(null, post.id)}
             />
           ))
