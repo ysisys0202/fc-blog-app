@@ -10,4 +10,12 @@ export type Post = {
   updatedAt?: string;
   uid?: string;
   category?: Category;
+  comments?: Comment[];
+};
+
+export type Comment = {
+  content: string;
+  createdAt: string;
+  email: string;
+  uid: string;
 };

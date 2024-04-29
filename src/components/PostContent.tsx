@@ -46,36 +46,43 @@ const PostContent = () => {
     <>
       <div className="post__content">
         {post ? (
-          <div className="post__box">
-            <h1 className="post__title">{post.summary}</h1>
-            <div className="post__profile-box">
-              <div className="post__profile"></div>
-              <span className="post__author-name">{post.author}</span>
-              <span className="post__date">{post.createdAt}</span>
-            </div>
+          <>
+            <div className="post__box">
+              <h1 className="post__title">{post.summary}</h1>
+              <div className="post__profile-box">
+                <div className="post__profile"></div>
+                <span className="post__author-name">{post.author}</span>
+                <span className="post__date">{post.createdAt}</span>
+              </div>
 
-            <div className="post__utils-box">
-              {post.category && (
-                <div className="post__category">{post.category}</div>
-              )}
-              <button
-                type="button"
-                className="post__delete"
-                onClick={handleDeleteButton.bind(null, post.id)}
-              >
-                삭제
-              </button>
-              <Link to={`${path.postEdit}/${post.id}`} className="post__edit">
-                수정
-              </Link>
+              <div className="post__utils-box">
+                {post.category && (
+                  <div className="post__category">{post.category}</div>
+                )}
+                <button
+                  type="button"
+                  className="post__delete"
+                  onClick={handleDeleteButton.bind(null, post.id)}
+                >
+                  삭제
+                </button>
+                <Link to={`${path.postEdit}/${post.id}`} className="post__edit">
+                  수정
+                </Link>
+              </div>
+              <p className="post__text post__text--pre-wrap">{post.content}</p>
             </div>
-            <p className="post__text post__text--pre-wrap">{post.content}</p>
-          </div>
+            {id && (
+              <Comments
+                post={post}
+                getPostContent={getPostContent.bind(null, id)}
+              />
+            )}
+          </>
         ) : (
           <Loader />
         )}
       </div>
-      <Comments />
     </>
   );
 };
