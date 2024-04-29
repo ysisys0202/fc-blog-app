@@ -11,13 +11,15 @@ function App() {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(
     !!user.user //user의 login 상태 (user가 있을때)
   );
-
   useEffect(() => {
     if (user) {
       setInit(true);
-      setIsAuthenticated(true);
     } else {
       setInit(false);
+    }
+    if (user.user) {
+      setIsAuthenticated(true);
+    } else {
       setIsAuthenticated(false);
     }
   }, [user]);
