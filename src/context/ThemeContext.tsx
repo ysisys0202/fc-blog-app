@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 
 type Props = {
   children: React.ReactNode;
@@ -16,6 +16,10 @@ export const ThemeProvider = ({ children }: Props) => {
   function toggleThemeMode() {
     setTheme((prevState) => (prevState === "light" ? "dark" : "light"));
     window.localStorage.setItem("theme", theme === "light" ? "dark" : "light");
+    document.documentElement.classList.remove(`theme-${theme}`);
+    document.documentElement.classList.add(
+      `theme-${theme === "light" ? "dark" : "light"}`
+    );
   }
   return (
     <ThemeContext.Provider value={{ theme, toggleThemeMode }}>
