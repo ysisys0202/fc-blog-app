@@ -96,7 +96,6 @@ footer a:hover {
 .post__list,
 .post__content {
   margin: 0 auto;
-  min-height: 90vh;
   padding: 20px 40px;
   text-align: center;
   max-width: 680px;
@@ -478,6 +477,81 @@ input:checked + .carousel__slide-container .nav label {
   animation: rotation 1000ms linear infinite;
 }
 
+/* comments */
+.comments {
+  margin: 0 auto;
+  max-width: 680px;
+  width: 100%;
+}
+
+.comments__form .form__block {
+  margin-top: 10px;
+  width: 100%;
+  height: 100%;
+}
+
+.comments__form label {
+  display: block;
+  margin: 20px 0 10px;
+  font-weight: 600;
+}
+.comments__form textarea {
+  display: block;
+  padding: 10px;
+  width: 100%;
+  min-height: 100px;
+  border-radius: 0.3rem;
+  border: 1px solid lightgray;
+  font-size: 16px;
+  line-height: 1.5;
+  box-sizing: border-box;
+}
+.comments__form .form__button--submit {
+  display: block;
+  width: 100px;
+  height: 36px;
+  margin-left: auto;
+  margin-right: 0;
+}
+.comment__list {
+  margin: 40px 0 100px;
+  padding: 0;
+}
+.comment__item {
+  padding: 12px 0;
+  border-bottom: 1px solid lightgray;
+  list-style: none;
+}
+.comment__profile-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+}
+.comment__email {
+  font-weight: 500;
+}
+.comment__date {
+  color: gray;
+}
+.comment__delete {
+  background-color: transparent;
+  border: none;
+  color: gray;
+  font-size: 12px;
+  text-decoration: underline;
+  cursor: pointer;
+  transition: color 200ms ease-in-out;
+}
+.comment__delete:focus,
+.comment__delete:hover {
+  color: black;
+}
+.comment__text {
+  padding-top: 4px;
+  font-size: 14px;
+}
+
 /* dark mode */
 html {
   transition: all 250ms ease-in-out;
@@ -497,7 +571,9 @@ html.theme-dark .post__navigation-item--active,
 html.theme-dark .post__title,
 html.theme-dark .post__author-name,
 html.theme-dark .footer__theme-button,
-html.theme-dark .profile__name {
+html.theme-dark .profile__name,
+html.theme-dark .comments__form label,
+html.theme-dark .comment__list {
   color: white;
 }
 
@@ -507,8 +583,15 @@ html.theme-dark .post__text,
 html.theme-dark .post__text--pre-wrap,
 html.theme-dark .profile__email,
 html.theme-dark .post__date,
-html.theme-dark .form_block {
+html.theme-dark .form_block,
+html.theme-dark .comment__date,
+html.theme-dark .comment__delete {
   color: lightgray;
+}
+
+html.theme-dark .comment__delete:focus,
+html.theme-dark .comment__delete:hover {
+  color: white;
 }
 
 html.theme-dark .form__error {
